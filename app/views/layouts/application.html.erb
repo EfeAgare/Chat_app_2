@@ -2,14 +2,19 @@
 <html>
   <head>
     <title>NewDesignChatApp</title>
+    <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <div class="ui small  inverted menu">
+    <%= render 'layouts/header' %>
+  </div>
   <body>
-    <%= yield %>
+    <div class="ui container">
+      <%= custom_bootstrap_flash %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,24 @@
+// Place all the styles related to the chatroom controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.chatbox {
+  height: 550px;
+}
+.login-form{
+  margin-top: 100px !important;
+}
+
+.ui.input > input {
+  border-radius: unset !important
+}
+
+#messages {
+  overflow: auto;
+}
+
+.input {
+  button {
+    display: none;
+  }
+}

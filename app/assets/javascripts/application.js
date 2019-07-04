@@ -11,6 +11,37 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require activestorage
 //= require turbolinks
+//= require semantic-ui
+//= require toastr
 //= require_tree .
+
+scroll_bottom = function() {
+  if ($('#messages').length > 0 ) {
+     $('#messages').scrollTop($('#messages')[0].scrollHeight);
+  }
+}
+
+submit_message = function() {
+  $('#message_body').on('keydown', function(e) {
+    if (e.keyCode == 13 ) {
+      $("button").click()
+      e.target.value == " "
+    }
+  })
+}
+
+// submit = $(function() {
+//   $('#message_body').on('ajax:success', function(a, b,c ) {
+//     $(this).find('input[type="text"]').val('');
+//   });
+// });
+
+$(document).on('turbolinks:load', function() {
+  $('.ui.dropdown').dropdown();
+  submit_message();
+  submit()
+  scroll_bottom();
+})
