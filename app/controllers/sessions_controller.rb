@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
-  
+
   def new
   end
 
@@ -38,17 +38,19 @@ class SessionsController < ApplicationController
   private
 
   def user_params 
-    unless params[:session][:email]
+    if params[:session][:email]
       {
         username: params[:session][:username],
         email: params[:session][:email],
+        password: params[:session][:password],
+        image: params[:session][:image]
+      }
+    else 
+      {
+        username: params[:session][:username],
         password: params[:session][:password]
       }
     end
-    {
-      username: params[:session][:username],
-      password: params[:session][:password]
-    }
   end
 
   def redirect_if_logged_in

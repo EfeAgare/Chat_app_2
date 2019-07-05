@@ -66,6 +66,9 @@ gem 'jquery-rails'
 gem 'toastr-rails'
 
 gem 'pg'
+gem 'autosize'
 
+gem 'cloudinary', require: false
+gem 'activestorage-cloudinary-service'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

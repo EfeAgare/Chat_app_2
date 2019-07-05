@@ -10,11 +10,11 @@
           <%=  render @messages %>
         </div>
       </div>
-      <div class="extra content">
+      <div class="extra content content-height">
         <%= form_for(@message, html: {class: 'ui reply form'}, url: message_path, remote: true) do |f| %>
           <div class="field">
             <div class="ui  fluid icon input">
-              <%= f.text_field :body, placeholder: "Enter a message...", required: true, class: 'message_body' %>
+              <%= f.text_area :body, placeholder: "Enter a message...", required: :true, class: 'message_body', cols: 2, rows: 1 %>
               <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe %>
             </div>
           </div>
@@ -25,16 +25,14 @@
   <div class="four wide column">
     <div class="ui fluid raised card chatbox">
       <div class="content">
-        <div class="ui inverted vertical menu">
-          <a class="active item">
-            Home
+       <h4>Users</h4>
+        <div class="ui inverted vertical menu username-field">
+          
+         <% @users.map do |user| %>
+          <a class="active item user-name">
+           <%= user.username %>
           </a>
-          <a class="item">
-            Messages
-          </a>
-          <a class="item">
-            Friends
-          </a>
+          <% end %>
         </div>
       </div>
     </div>

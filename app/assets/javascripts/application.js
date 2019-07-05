@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require semantic-ui
 //= require toastr
+//= require autosize
 //= require_tree .
 
 scroll_bottom = function() {
@@ -25,13 +26,21 @@ scroll_bottom = function() {
 }
 
 submit_message = function() {
-  $('#message_body').on('keydown', function(e) {
-    if (e.keyCode == 13 ) {
+  $('textarea').on('keydown', function(e) {
+    if (e.keyCode == 13 && e.shiftKey ) {
+      $('textarea').val($('#message_body').val() + "\n")
+      autosize($('textarea'));
+      e.preventDefault()
+    }
+    else if (e.keyCode == 13) {
       $("button").click()
-      e.target.value == " "
+      e.preventDefault()
+      $("textarea").val('')
+      return false
     }
   })
 }
+
 
 // submit = $(function() {
 //   $('#message_body').on('ajax:success', function(a, b,c ) {
@@ -39,9 +48,11 @@ submit_message = function() {
 //   });
 // });
 
+
 $(document).on('turbolinks:load', function() {
   $('.ui.dropdown').dropdown();
   submit_message();
-  submit()
   scroll_bottom();
+
+
 })
