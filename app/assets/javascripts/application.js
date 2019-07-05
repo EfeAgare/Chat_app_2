@@ -41,18 +41,8 @@ submit_message = function() {
   })
 }
 
-
-// submit = $(function() {
-//   $('#message_body').on('ajax:success', function(a, b,c ) {
-//     $(this).find('input[type="text"]').val('');
-//   });
-// });
-
-
 $(document).on('turbolinks:load', function() {
   $('.ui.dropdown').dropdown();
   submit_message();
   scroll_bottom();
-
-
 })
