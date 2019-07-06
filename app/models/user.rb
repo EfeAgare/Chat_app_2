@@ -13,7 +13,13 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :messages
+  has_many :generals, foreign_key: "user_message_id", class_name:  "Message", dependent: :destroy
+  has_many :user_messages, through: :generals
+  
+
+  has_many :specifics, foreign_key: "friend_message_id", class_name:  "Message", dependent: :destroy
+  has_many :friend_messages, through: :specifics
+
 
   has_one_attached :image
 

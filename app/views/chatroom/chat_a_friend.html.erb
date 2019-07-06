@@ -11,11 +11,12 @@
         </div>
       </div>
       <div class="extra content content-height">
-        <%= form_for(@message, html: {class: 'ui reply form'}, url: message_path, remote: true) do |f| %>
+        <%= form_for(@message, html: {class: 'ui reply form'}, url: specific_message_path, remote: true) do |f| %>
           <div class="field">
             <div class="ui  fluid icon input">
               <%= f.text_area :body, placeholder: "Enter a message...", required: :true, class: 'message_body', cols: 2, rows: 1 %>
               <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe %>
+              <%= f.hidden_field :friend_message_id, :value => params[:friend_message_id] %>
             </div>
           </div>
         <% end %>
@@ -26,16 +27,11 @@
     <div class="ui fluid raised card chatbox">
       <div class="content">
        <h4>Users</h4>
-          <% if @users.length == 0 %>
-          <h5>No users yet</h5>
-        <% else %>
-          <div class="ui inverted vertical menu username-field">
-            <% @users.map do |user| %>
-              <a class="active item user-name" href="/user/<%= user.id %>" >
-                <%= user.username %>
-              </a>
-            </div>
-          <% end %>
+        <div class="ui inverted vertical menu username-field">
+         <% @users.map do |user| %>
+          <a class="active item user-name" href="/user/<%= user.id %>" >
+           <%= user.username %>
+          </a>
           <% end %>
         </div>
       </div>

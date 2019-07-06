@@ -1,4 +1,4 @@
-<% if session[:user_id] == message.user_id %>
+<% if session[:user_id] == message.user_message_id %>
   <div class="event chat-message user-chat-message">
 
     <div class="content message-flex">
@@ -15,10 +15,10 @@
   </div>
 <% else %>
   <div class="event chat-message">
-    <%= image_tag current_user.image, class: "ui medium circular image oval" %>
+    <%= image_tag message.user_message.image, class: "ui medium circular image oval" %>
      <div class="content message-flex">
        <div class="non-current-chat-username">
-      <%= message.user.username %>
+      <%= message.user_message.username %>
     </div>
       <div class="summary">
         <%= message.body %>

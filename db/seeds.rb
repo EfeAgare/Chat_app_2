@@ -9,4 +9,4 @@
 
 user = User.create(username: 'knowledge', email: 'knowledgeagare157@gmail.com', password: '200efe')
 
-Message.create(body: 'working for me', user_id: user.id)
+Message.create(body: 'working for me', user_message_id: user.id)
