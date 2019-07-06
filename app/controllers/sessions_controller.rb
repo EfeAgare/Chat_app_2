@@ -1,8 +1,9 @@
-class SessionsController < ApplicationController
-  before_action :redirect_if_logged_in, only: [:new, :create]
+# frozen_string_literal: true
 
-  def new
-  end
+class SessionsController < ApplicationController
+  before_action :redirect_if_logged_in, only: %i[new create]
+
+  def new; end
 
   def sign_up
     @user = User.new(user_params)
@@ -37,7 +38,7 @@ class SessionsController < ApplicationController
 
   private
 
-  def user_params 
+  def user_params
     if params[:session][:email]
       {
         username: params[:session][:username],
@@ -45,7 +46,7 @@ class SessionsController < ApplicationController
         password: params[:session][:password],
         image: params[:session][:image]
       }
-    else 
+    else
       {
         username: params[:session][:username],
         password: params[:session][:password]
@@ -55,7 +56,7 @@ class SessionsController < ApplicationController
 
   def redirect_if_logged_in
     if logged_in?
-      flash[:error] = "Your are already logged in"
+      flash[:error] = 'Your are already logged in'
       redirect_to root_path
     end
   end

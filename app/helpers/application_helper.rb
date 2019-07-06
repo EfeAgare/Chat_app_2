@@ -1,5 +1,6 @@
-module ApplicationHelper
+# frozen_string_literal: true
 
+module ApplicationHelper
   def custom_bootstrap_flash
     flash_messages = []
     flash.each do |type, message|
@@ -10,5 +11,4 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
-  
 end

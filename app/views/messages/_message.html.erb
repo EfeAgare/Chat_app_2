@@ -1,6 +1,6 @@
-<% if session[:user_id] == message.user_message_id %>
+<% if session[:user_id] == message.user_message.id %>
   <div class="event chat-message user-chat-message">
-
+     
     <div class="content message-flex">
        <div class="current-chat-username">
       <%= current_user.username %>
