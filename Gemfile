@@ -28,6 +28,8 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'kramdown'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -74,8 +76,8 @@ gem 'activestorage-cloudinary-service'
 gem 'cloudinary', require: false
 
 gem 'redis-namespace'
-gem 'redis-rails'
 gem 'redis-rack-cache'
+gem 'redis-rails'
 
 gem 'minima', '~> 2.0'
 
@@ -83,3 +85,4 @@ gem 'minima', '~> 2.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'jekyll'
+

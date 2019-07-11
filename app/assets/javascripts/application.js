@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require semantic-ui
 //= require toastr
+//= require toastr
 //= require autosize
 //= require_tree .
 

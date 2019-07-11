@@ -1,4 +1,4 @@
-<% if session[:user_id] == message.user_message.id %>
+<% if session[:user_id]  == message.user_message.id %>
   <div class="event chat-message user-chat-message">
      
     <div class="content message-flex">
@@ -6,7 +6,7 @@
       <%= current_user.username %>
     </div>
       <div class="summary">
-        <%= message.body %>
+        <%= sanitize markdown_to_html(message.body) %>
       </div>
       
     </div>
@@ -21,7 +21,7 @@
       <%= message.user_message.username %>
     </div>
       <div class="summary">
-        <%= message.body %>
+        <%= sanitize markdown_to_html(message.body) %>
       </div>
       
     </div>

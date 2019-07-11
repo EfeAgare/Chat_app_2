@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module MessageHelper
   def fetch_all_messages_redis
     messages = $redis.get('messages')  rescue nil # This line requests redis-server to accepts any value associate with messages key
@@ -22,5 +20,12 @@ module MessageHelper
       $redis.expire('messages', 1.hour.to_i)
     end
     messages
+  end
+
+  def markdown_to_html(text)
+    if text.nil?
+      return
+    end
+    Kramdown::Document.new(text, input: 'GFM').to_html
   end
 end

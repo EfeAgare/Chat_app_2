@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(username: params[:session][:username])
+    binding.pry
     if @user.blank?
       flash.now[:warning] = 'You need to create an account'
       redirect_to login_url

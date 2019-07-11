@@ -355,6 +355,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jekyll
   jquery-rails
+  kramdown
   listen (>= 3.0.5, < 3.2)
   minima (~> 2.0)
   pg
@@ -380,4 +381,4 @@ RUBY VERSION
    ruby 2.6.2p47
 
 BUNDLED WITH
-   2.0.1
+   2.0.2

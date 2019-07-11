@@ -7,5 +7,7 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    $("#message-container").append data.message
-    scroll_bottom()
+    toastr.info("Hi there, you have a new message", "Notification") if data.mention
+    if (data.message && !data.message?)
+      $("#message-container").append data.message
+      scroll_bottom()

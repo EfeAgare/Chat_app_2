@@ -7,7 +7,7 @@ class ChatroomController < ApplicationController
   def index
     @users = User.where('id != ?', session[:user_id])
     @message = Message.new
-    @messages = fetch_all_messages_redis
+    @messages = Message.where('friend_message_id is null')
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
@@ -15,8 +15,10 @@ class ChatroomController < ApplicationController
   def chat_a_friend
     @users = User.where('id != ?', session[:user_id])
     @message = Message.new(friend_message_id: params[:user_id])
-    @messages = fetch_specific_messages_redis
-
+    @messages = Message.where("user_message_id = ? AND friend_message_id = ? OR
+      user_message_id = ? AND friend_message_id = ? ",
+                             session[:user_id], params[:friend_message_id],
+                             params[:friend_message_id], session[:user_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end

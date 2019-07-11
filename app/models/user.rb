@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  validates :username, presence: true
+  NAME_REGEX = /\w+/.freeze
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A#{NAME_REGEX}\z/i }
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   VALID_EMAIL =
