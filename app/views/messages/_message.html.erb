@@ -1,29 +1,25 @@
-<% if session[:user_id]  == message.user_message.id %>
-  <div class="event chat-message user-chat-message">
-     
+<% if session[:user_id]  == message.user_message_id %>
+  <div class="user-chat-message event chat-message">
     <div class="content message-flex">
-       <div class="current-chat-username">
-      <%= current_user.username %>
-    </div>
+      <div class="current-chat-username">
+        <%= current_user.username %>
+      </div>
       <div class="summary">
         <%= sanitize markdown_to_html(message.body) %>
       </div>
-      
     </div>
-    
     <%= image_tag current_user.image, class: "ui medium circular image oval" %>
   </div>
 <% else %>
   <div class="event chat-message">
     <%= image_tag message.user_message.image, class: "ui medium circular image oval" %>
-     <div class="content message-flex">
-       <div class="non-current-chat-username">
-      <%= message.user_message.username %>
-    </div>
+    <div class="content message-flex">
+      <div class="non-current-chat-username">
+        <%= message.user_message.username %>
+      </div>
       <div class="summary">
         <%= sanitize markdown_to_html(message.body) %>
       </div>
-      
     </div>
   </div>
 <% end %>

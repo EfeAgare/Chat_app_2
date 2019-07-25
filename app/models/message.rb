@@ -2,7 +2,7 @@
 
 class Message < ApplicationRecord
   belongs_to :user_message, class_name: 'User'
-  belongs_to :specific_message, class_name: 'User', optional: true
+  belongs_to :friend_message, class_name: 'User', optional: true
 
   # Returns a list of users @mentioned in message content.
   def mentions

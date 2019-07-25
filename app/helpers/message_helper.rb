@@ -1,10 +1,15 @@
 module MessageHelper
   def fetch_all_messages_redis
     messages = $redis.get('messages')  rescue nil # This line requests redis-server to accepts any value associate with messages key
-    if !messages.nil? # this condition will executes if any messages not available on redis server
+    users = $redis.get('users')  rescue nil # This line requests redis-server to accepts any value associate with messages key
+    if messages.nil? # this condition will executes if any messages not available on redis server
        messages = Message.where('friend_message_id is null')
+       users = messages.map { |message| message.user_message }
+       messages  = messages.to_json
       $redis.set('messages', messages)
+      $redis.set('users', users)
       $redis.expire('messages', 1.hour.to_i)
+      $redis.expire('users', 1.hour.to_i)
     end
     messages
   end

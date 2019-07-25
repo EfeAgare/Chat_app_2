@@ -7,9 +7,11 @@ class MessagesController < ApplicationController
     message = Message.create(body: params[:message][:body], user_message_id: session[:user_id])
     ActionCable.server.broadcast 'chatroom_channel',
                                  message: message_render(message)
-    message.mentions.each do |mention|
-      ActionCable.server.broadcast "chatroom_channel_for_user_#{mention.id}",
-                                   mention: true
+    if message.mentions
+      message.mentions.each do |mention|
+        ActionCable.server.broadcast "chatroom_channel_for_user_#{mention.id}",
+                                    mention: true
+      end
     end
   rescue ActiveRecord::RecordNotSaved
     redirect_to root_path
