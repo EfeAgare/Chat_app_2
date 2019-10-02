@@ -1,30 +1,25 @@
 module MessageHelper
   def fetch_all_messages_redis
-    messages = $redis.get('messages')  rescue nil # This line requests redis-server to accepts any value associate with messages key
-    users = $redis.get('users')  rescue nil # This line requests redis-server to accepts any value associate with messages key
+    messages = Marshal.load($redis.get('messages'))  rescue nil # This line requests redis-server to accepts any value associate with messages key
     if messages.nil? # this condition will executes if any messages not available on redis server
-       messages = Message.where('friend_message_id is null')
-       users = messages.map { |message| message.user_message }
-       messages  = messages.to_json
-      $redis.set('messages', messages)
-      $redis.set('users', users)
+      messages = Message.where('friend_message_id is null').includes(:user_message, :friend_message)
+      $redis.set('messages', Marshal.dump(messages))
       $redis.expire('messages', 1.hour.to_i)
-      $redis.expire('users', 1.hour.to_i)
     end
     messages
   end
 
   def fetch_specific_messages_redis
-    messages = $redis.get('messages') rescue nil  # This line requests redis-server to accepts any value associate with messages key
-    if !messages.nil? # this condition will executes if any messages not available on redis server
-      messages = Message.where("user_message_id = ? AND friend_message_id = ? OR
+    friend_messages = Marshal.load($redis.get('friend_messages')) rescue nil  # This line requests redis-server to accepts any value associate with messages key
+    if friend_messages.nil? # this condition will executes if any messages not available on redis server
+      friend_messages = Message.where("user_message_id = ? AND friend_message_id = ? OR
         user_message_id = ? AND friend_message_id = ? ",
                                session[:user_id], params[:friend_message_id],
-                               params[:friend_message_id], session[:user_id])
-      $redis.set('messages', messages)
-      $redis.expire('messages', 1.hour.to_i)
+                               params[:friend_message_id], session[:user_id]).includes(:user_message, :friend_message)
+      $redis.set('friend_messages', Marshal.dump(friend_messages))
+      $redis.expire('friend_messages', 1.hour.to_i)
     end
-    messages
+    friend_messages
   end
 
   def markdown_to_html(text)
